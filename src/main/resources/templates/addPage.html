@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/post}">
+    <label class="firstName">First Name: </label>
+    <input type="text" name="firstName" class="firstName">
+    <br>
+    <br>
+    <label class="lastName">Last Name: </label>
+    <input type="text" name="lastName" class="lastName">
+    <br>
+    <br>
+    <label class="dateOfBirth">Date of Birth: </label>
+    <input type="date" name="dateOfBirth" class="dateOfBirth" th:value="${today}">
+    <br>
+    <br>
+    <label>Sex: </label>
+    <select th:each="sex : ${}">
+        <option></option>
+    </select>
+</form>
+</body>
+</html>
