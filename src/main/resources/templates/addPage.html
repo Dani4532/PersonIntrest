@@ -5,23 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/post}">
-    <label class="firstName">First Name: </label>
-    <input type="text" name="firstName" class="firstName">
+<form th:action="@{/post}" method="post">
+    <label>First Name: </label>
+    <input type="text" name="firstName" >
     <br>
     <br>
-    <label class="lastName">Last Name: </label>
-    <input type="text" name="lastName" class="lastName">
+    <label>Last Name: </label>
+    <input type="text" name="lastName" >
     <br>
     <br>
     <label class="dateOfBirth">Date of Birth: </label>
     <input type="date" name="dateOfBirth" class="dateOfBirth" th:value="${today}">
     <br>
     <br>
-    <label>Sex: </label>
-    <select th:each="sex : ${}">
-        <option></option>
+    <label class="sex">Sex: </label>
+    <select name="sex">
+        <option th:each="sex : ${sexes}" th:text="${sex}" th:value="${sex}" name="sex"></option>
     </select>
+    <br>
+    <br>
+    <label>Interests: </label>
+    <div th:each="interest : ${interests}" >
+        <input type="checkbox" th:text="${interest}" th:name="'interests' + ${interest.id}" th:value="${interest}">
+    </div>
+    <input type="submit">
 </form>
 </body>
 </html>

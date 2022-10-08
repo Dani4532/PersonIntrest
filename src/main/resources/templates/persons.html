@@ -14,7 +14,7 @@
         <th>Intrests</th>
     </tr>
     <tr th:each="person : ${personList}" >
-        <th th:text="${person.firstName}"></th>
+        <th th:text="${person.getFirstName()}"></th>
         <th th:text="${person.lastName}"></th>
         <th th:text="${person.dateOfBirth}"></th>
         <th th:text="${person.sex}"></th>
