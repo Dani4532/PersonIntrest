@@ -2,9 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New</title>
+    <link rel="stylesheet" th:href="@{/css/custom-form.css}"/>
 </head>
 <body>
+<h2>New Person</h2>
 <form th:action="@{/post}" method="post" th:object="${person}">
 
     <div th:if="${#fields.hasErrors('*')}">
@@ -19,19 +21,23 @@
     <input type="text" th:field="*{firstName}">
     <span th:if="${#fields.hasErrors('firstName')}"
           th:errors="*{firstName}"/>
+
     <br>
+    <div id="error" th:if="${error}">Pleas don't leave Firstname empty</div>
     <br>
     <label>Last Name: </label>
     <input type="text" name="lastName" th:field="*{lastName}" >
     <span th:if="${#fields.hasErrors('lastName')}"
           th:errors="*{lastName}"/>
     <br>
+    <div id="error" th:if="${error}">Pleas don't leave Lastname empty</div>
     <br>
     <label class="dateOfBirth">Date of Birth: </label>
     <input type="date" name="dateOfBirth" class="dateOfBirth" th:value="${today}" th:field="*{dateOfBirth}">
     <span th:if="${#fields.hasErrors('dateOfBirth')}"
           th:errors="*{dateOfBirth}"/>
     <br>
+    <div id="error" th:if="${error}">Pleas don't select a birthdate in the past or present</div>
     <br>
     <label class="sex">Sex: </label>
     <select name="sex">
@@ -47,7 +53,9 @@
     </div>
     <span th:if="${#fields.hasErrors('interests')}"
           th:errors="*{interests}"/>
-    <input type="submit">
+    <div id="error" th:if="${error}">Pleas don't select more than 3 interests</div>
+    <br>
+    <input type="submit" value="ADD">
 </form>
 </body>
 </html>

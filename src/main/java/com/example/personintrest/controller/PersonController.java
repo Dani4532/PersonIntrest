@@ -1,23 +1,16 @@
 package com.example.personintrest.controller;
 
-import com.example.personintrest.entity.Interest;
 import com.example.personintrest.entity.Person;
-import com.example.personintrest.entity.Sex;
 import com.example.personintrest.repository.InterestRepository;
 import com.example.personintrest.repository.PersonRepository;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.awt.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public record PersonController(PersonRepository personRepository, InterestRepository interestRepository) {
@@ -30,7 +23,11 @@ public record PersonController(PersonRepository personRepository, InterestReposi
     }
 
     @GetMapping("/new")
-    public String addNewPerson(Model model){
+    public String addNewPerson(Model model, boolean error){
+
+        if (error){
+            model.addAttribute("error", error);
+        }
         model.addAttribute("today", LocalDate.now());
         model.addAttribute("sexes", List.of("MALE","FEMALE", "DIVERSE"));
         model.addAttribute("interests", interestRepository.findAll());
@@ -42,7 +39,8 @@ public record PersonController(PersonRepository personRepository, InterestReposi
     public String saveNewPerson(Model model, @Valid @ModelAttribute("person") Person newPerson, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
-            return addNewPerson(model);
+            var error = true;
+            return addNewPerson(model,error);
         }
         personRepository.save(newPerson);
 

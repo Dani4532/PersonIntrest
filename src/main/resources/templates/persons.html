@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/custom.css}"/>
 </head>
 <body>
 <table>
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Date of Birth</th>
-        <th>Sex</th>
-        <th>Intrests</th>
+        <th id="heading">First Name</th>
+        <th id="heading">Last Name</th>
+        <th id="heading">Date of Birth</th>
+        <th id="heading">Sex</th>
+        <th id="heading">Intrests</th>
     </tr>
-    <tr th:each="person : ${personList}" >
+    <tr th:each="person : ${personList}">
         <th th:text="${person.getFirstName()}"></th>
         <th th:text="${person.lastName}"></th>
         <th th:text="${person.dateOfBirth}"></th>
         <th th:text="${person.sex}"></th>
-        <th th:each="interest : ${person.interests}" th:text="${interest} + ', '"></th>
+        <th><span th:each="interest : ${person.interests}" th:text="${interest} + ', '"></span></th>
     </tr>
 </table>
-<a th:href="@{/new}">New</a>
+<br>
+<div><a th:href="@{/new}"><button>New</button></a></div>
+
 </body>
 </html>
