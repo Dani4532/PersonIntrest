@@ -23,21 +23,21 @@
           th:errors="*{firstName}"/>
 
     <br>
-    <div id="error" th:if="${error}">Pleas don't leave Firstname empty</div>
+    <div id="error" th:if="${error}">Please don't leave Firstname empty and the first letter must be uppercase</div>
     <br>
     <label>Last Name: </label>
     <input type="text" name="lastName" th:field="*{lastName}" >
     <span th:if="${#fields.hasErrors('lastName')}"
           th:errors="*{lastName}"/>
     <br>
-    <div id="error" th:if="${error}">Pleas don't leave Lastname empty</div>
+    <div id="error" th:if="${error}">Please don't leave Lastname empty and the first letter must be uppercase</div>
     <br>
     <label class="dateOfBirth">Date of Birth: </label>
     <input type="date" name="dateOfBirth" class="dateOfBirth" th:value="${today}" th:field="*{dateOfBirth}">
     <span th:if="${#fields.hasErrors('dateOfBirth')}"
           th:errors="*{dateOfBirth}"/>
     <br>
-    <div id="error" th:if="${error}">Pleas don't select a birthdate in the past or present</div>
+    <div id="error" th:if="${error}">Please don't select a birthdate in the past or present</div>
     <br>
     <label class="sex">Sex: </label>
     <select name="sex">
@@ -53,7 +53,7 @@
     </div>
     <span th:if="${#fields.hasErrors('interests')}"
           th:errors="*{interests}"/>
-    <div id="error" th:if="${error}">Pleas don't select more than 3 interests</div>
+    <div id="error" th:if="${error}">Please don't select more than 3 interests</div>
     <br>
     <input type="submit" value="ADD">
 </form>
