@@ -4,10 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,9 +23,11 @@ public class Person {
     private Integer id;
 
     @NotEmpty
+    @Pattern(regexp = "^[A-Z][a-z]{3,28}$")
     private String firstName;
 
     @NotEmpty
+    @Pattern(regexp = "^[A-Z][a-z]{3,28}$")
     private String lastName;
 
     @PastOrPresent
