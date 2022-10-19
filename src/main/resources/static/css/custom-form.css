@@ -12,7 +12,7 @@ h2{
     top: 5%;
 }
 
-#error{
+.error{
     font-size: small;
     color: red;
 }

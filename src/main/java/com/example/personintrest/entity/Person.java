@@ -22,12 +22,12 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty
-    @Pattern(regexp = "^[A-Z][a-z]{3,28}$")
+    @NotEmpty(message = "First Name can't be empty")
+    @Pattern(regexp = "^[A-Z][a-z]{3,28}$", message = "First Name must start with an Uppercase and must be up to 29 characters long")
     private String firstName;
 
-    @NotEmpty
-    @Pattern(regexp = "^[A-Z][a-z]{3,28}$")
+    @NotEmpty(message = "Last Name can't be empty")
+    @Pattern(regexp = "^[A-Z][a-z]{3,28}$", message = "Last Name must start with an Uppercase and must be up to 29 characters long")
     private String lastName;
 
     @PastOrPresent

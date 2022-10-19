@@ -1,6 +1,7 @@
 package com.example.personintrest.controller;
 
 import com.example.personintrest.entity.Person;
+import com.example.personintrest.entity.Sex;
 import com.example.personintrest.repository.InterestRepository;
 import com.example.personintrest.repository.PersonRepository;
 import org.springframework.stereotype.Controller;
@@ -23,24 +24,25 @@ public record PersonController(PersonRepository personRepository, InterestReposi
     }
 
     @GetMapping("/new")
-    public String addNewPerson(Model model, boolean error){
+    public String addNewPerson(Model model, Person newPerson){
 
-        if (error){
-            model.addAttribute("error", error);
-        }
         model.addAttribute("today", LocalDate.now());
-        model.addAttribute("sexes", List.of("MALE","FEMALE", "DIVERSE"));
+        model.addAttribute("sexes", Sex.values());
         model.addAttribute("interests", interestRepository.findAll());
         model.addAttribute("person", new Person());
+
         return "addPage";
     }
 
     @PostMapping(value = "/post")
-    public String saveNewPerson(Model model, @Valid @ModelAttribute("person") Person newPerson, BindingResult bindingResult){
+    public String saveNewPerson(Model model, @Valid Person newPerson, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
-            var error = true;
-            return addNewPerson(model,error);
+            model.addAttribute("today", LocalDate.now());
+            model.addAttribute("sexes", Sex.values());
+            model.addAttribute("interests", interestRepository.findAll());
+            model.addAttribute("person", newPerson);
+            return "addPage";
         }
         personRepository.save(newPerson);
 

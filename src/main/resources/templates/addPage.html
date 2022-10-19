@@ -9,51 +9,39 @@
 <h2>New Person</h2>
 <form th:action="@{/post}" method="post" th:object="${person}">
 
-    <div th:if="${#fields.hasErrors('*')}">
-        <h1>Errors</h1>
-        <ul>
-            <li th:each="err : ${#fields.errors('*')}"
-                th:text="${err}">Error</li>
-        </ul>
-    </div>
 
     <label>First Name: </label>
     <input type="text" th:field="*{firstName}">
-    <span th:if="${#fields.hasErrors('firstName')}"
-          th:errors="*{firstName}"/>
-
+    <div th:if="${#fields.hasErrors('firstName')}"
+          th:errors="*{firstName}" th:errorclass="error"/>
     <br>
-    <div id="error" th:if="${error}">Please don't leave Firstname empty and the first letter must be uppercase</div>
     <br>
     <label>Last Name: </label>
     <input type="text" name="lastName" th:field="*{lastName}" >
-    <span th:if="${#fields.hasErrors('lastName')}"
-          th:errors="*{lastName}"/>
+    <div th:if="${#fields.hasErrors('lastName')}"
+          th:errors="*{lastName}" th:errorclass="error"/>
     <br>
-    <div id="error" th:if="${error}">Please don't leave Lastname empty and the first letter must be uppercase</div>
     <br>
     <label class="dateOfBirth">Date of Birth: </label>
     <input type="date" name="dateOfBirth" class="dateOfBirth" th:value="${today}" th:field="*{dateOfBirth}">
-    <span th:if="${#fields.hasErrors('dateOfBirth')}"
-          th:errors="*{dateOfBirth}"/>
+    <div th:if="${#fields.hasErrors('dateOfBirth')}"
+          th:errors="*{dateOfBirth}" th:errorclass="error"/>
     <br>
-    <div id="error" th:if="${error}">Please don't select a birthdate in the past or present</div>
     <br>
     <label class="sex">Sex: </label>
     <select name="sex">
         <option th:each="sex : ${sexes}" th:text="${sex}" th:value="${sex}" name="sex" th:field="*{sex}"></option>
     </select>
-    <span th:if="${#fields.hasErrors('sex')}"
-          th:errors="*{sex}"/>
+    <div th:if="${#fields.hasErrors('sex')}"
+          th:errors="*{sex}" th:errorclass="error"/>
     <br>
     <br>
     <label>Interests: </label>
     <div th:each="interest : ${interests}" >
         <input type="checkbox" th:text="${interest}"  th:value="${interest.id}" th:field="*{interests}">
     </div>
-    <span th:if="${#fields.hasErrors('interests')}"
-          th:errors="*{interests}"/>
-    <div id="error" th:if="${error}">Please don't select more than 3 interests</div>
+    <div th:if="${#fields.hasErrors('interests')}"
+          th:errors="*{interests}" th:errorclass="error"/>
     <br>
     <input type="submit" value="ADD">
 </form>
