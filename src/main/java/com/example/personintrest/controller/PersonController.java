@@ -24,7 +24,7 @@ public record PersonController(PersonRepository personRepository, InterestReposi
     }
 
     @GetMapping("/new")
-    public String addNewPerson(Model model, Person newPerson){
+    public String addNewPerson(Model model){
 
         model.addAttribute("today", LocalDate.now());
         model.addAttribute("sexes", Sex.values());
@@ -34,7 +34,7 @@ public record PersonController(PersonRepository personRepository, InterestReposi
         return "addPage";
     }
 
-    @PostMapping(value = "/post")
+    @PostMapping(value = "/new")
     public String saveNewPerson(Model model, @Valid Person newPerson, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
